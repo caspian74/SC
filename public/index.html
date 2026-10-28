@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#D9232A">
+<title>Sugar Cube Coffee — Menú</title>
+<meta name="description" content="Menú digital de Sugar Cube Coffee. Ordena para recoger o entrega.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,800;1,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{ink:'#0D0D0D',card:'#1A1A19',red:'#D9232A',cream:'#FFF0F3',mute:'#A3A3A3'}}}}
+</script>
+<style>
+html{scroll-behavior:smooth}
+body{background:#0D0D0D;font-family:'Plus Jakarta Sans',sans-serif;color:#FFF0F3;-webkit-tap-highlight-color:transparent}
+.no-sb::-webkit-scrollbar{display:none}.no-sb{scrollbar-width:none}
+.disp{font-family:'Kanit',sans-serif;font-style:italic;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+:focus-visible{outline:2px solid #FFF0F3;outline-offset:2px}
+
+/* Splash (momento principal de entrada) */
+.splash{position:fixed;inset:0;z-index:100;background:#D9232A;display:grid;place-items:center;border-radius:0 0 50% 50%/0 0 12% 12%;transition:transform .9s cubic-bezier(.77,0,.18,1) .1s}
+.splash img{width:min(78vw,22rem);animation:splashIn 1s cubic-bezier(.2,1.4,.4,1) both}
+.splash.leave{transform:translateY(-105%)}
+@keyframes splashIn{from{opacity:0;transform:scale(.4) rotate(-12deg)}to{opacity:1;transform:none}}
+
+/* Hero */
+.hero-blob{background:radial-gradient(ellipse at 30% 20%,#f03a41 0,#D9232A 55%,#a8161c 100%);border-radius:50%/46%;box-shadow:0 20px 60px -10px rgba(217,35,42,.7),inset 0 0 0 3px rgba(255,240,243,.18);animation:blobIn 1.1s cubic-bezier(.2,1.2,.4,1) 1.1s both,float 6s ease-in-out 2.2s infinite;transform-style:preserve-3d;transition:transform .2s}
+@keyframes blobIn{from{opacity:0;transform:scale(.6) rotate(-10deg)}to{opacity:1;transform:rotate(-3deg)}}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.sp{position:absolute;color:#FFF0F3;animation:tw 2.6s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:1;transform:scale(1) rotate(0)}50%{opacity:.25;transform:scale(.6) rotate(45deg)}}
+.rise{opacity:0;animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* Marquee */
+.band{background:#D9232A;transform:rotate(-2deg);margin:0 -1rem;overflow:hidden;box-shadow:0 8px 30px -8px rgba(217,35,42,.6)}
+.track{display:flex;width:max-content;animation:mq 18s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* Nav */
+#ind{position:absolute;top:.75rem;bottom:.75rem;left:0;width:0;border-radius:999px;background:#D9232A;box-shadow:0 4px 18px -4px rgba(217,35,42,.8);transition:left .35s cubic-bezier(.3,1.3,.5,1),width .35s cubic-bezier(.3,1.3,.5,1)}
+.pill{position:relative;z-index:1;transition:color .25s}
+#prog{position:fixed;top:0;left:0;height:3px;width:100%;background:#D9232A;transform-origin:0 50%;transform:scaleX(0);z-index:60}
+
+/* Títulos y tarjetas */
+.oval{display:inline-block;background:#D9232A;border-radius:50%/48%;padding:.45rem 1.6rem;transform:rotate(-2deg);box-shadow:0 8px 24px -8px rgba(217,35,42,.7)}
+.rv{opacity:0;transform:translateY(28px) scale(.97)}
+.rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .7s cubic-bezier(.2,.9,.3,1.1);transition-delay:var(--d,0s)}
+.item{transition:transform .25s,border-color .25s;border:1px solid rgba(255,255,255,.06)}
+.item:hover{border-color:rgba(217,35,42,.7);transform:translateY(-3px)}
+.item img{transition:transform .6s}.item:hover img{transform:scale(1.12) rotate(2deg)}
+.price{display:inline-block;transform:rotate(-4deg);transition:transform .25s}.item:hover .price{transform:rotate(0) scale(1.1)}
+.add{position:relative;overflow:hidden;transition:transform .15s,background .2s}
+.add:active{transform:scale(.9)}
+.rip{position:absolute;border-radius:50%;background:rgba(255,240,243,.55);transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+
+/* CTA */
+.cta{position:relative;overflow:hidden;animation:pulse 2.4s infinite}
+.cta::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,240,243,.35) 50%,transparent 70%);transform:translateX(-120%);animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{60%,100%{transform:translateX(120%)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(217,35,42,.7)}70%{box-shadow:0 0 0 16px rgba(217,35,42,0)}100%{box-shadow:0 0 0 0 rgba(217,35,42,0)}}
+.wig{animation:wig 4s ease-in-out infinite;transform-origin:50% 80%}
+@keyframes wig{0%,85%,100%{transform:rotate(0)}88%{transform:rotate(-14deg)}92%{transform:rotate(12deg)}96%{transform:rotate(-8deg)}}
+.bump{animation:bump .4s cubic-bezier(.3,1.8,.5,1)}
+@keyframes bump{50%{transform:scale(1.35)}}
+.sheet{transition:transform .45s cubic-bezier(.2,.9,.3,1)}
+#toast{transition:transform .4s cubic-bezier(.3,1.5,.5,1),opacity .3s}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.splash{display:none}.hero-blob{transform:rotate(-3deg)}.rise{opacity:1}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="splash" id="splash"><img src="logo.png" alt="Sugar Cube Coffee"></div>
+
+<div class="max-w-md mx-auto min-h-screen bg-ink shadow-2xl relative overflow-x-hidden" style="padding-bottom:calc(7.5rem + env(safe-area-inset-bottom,0px))">
+
+  <!-- HEADER -->
+  <header class="px-5 pt-12 pb-4 text-center relative overflow-hidden">
+    <span class="sp text-2xl text-red" style="top:2rem;left:1.2rem" data-px="30">✦</span>
+    <span class="sp text-sm" style="top:5.5rem;right:1rem;animation-delay:.7s" data-px="-50">✦</span>
+    <span class="sp text-xs" style="top:15rem;left:.8rem;animation-delay:1.3s" data-px="60">✦</span>
+    <span class="sp text-lg text-red" style="top:13rem;right:1.4rem;animation-delay:1.9s" data-px="-25">✦</span>
+
+    <div class="hero-blob w-[19rem] max-w-full mx-auto px-5 py-9 relative" id="hero">
+      <img src="logo.png" alt="Sugar Cube Coffee" class="w-full drop-shadow-[0_6px_14px_rgba(0,0,0,.25)]">
+    </div>
+
+    <div class="rise mt-8 inline-flex items-center gap-2 border border-red/70 rounded-full px-4 py-2 text-xs font-semibold" style="animation-delay:2s">
+      <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full rounded-full bg-red opacity-75 animate-ping"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-red"></span></span>
+      Abierto • Ordena para recoger o entrega
+    </div>
+    <p class="rise text-mute text-xs mt-3" style="animation-delay:2.2s">📍 Tijuana, Baja California</p>
+  </header>
+
+  <!-- MARQUEE -->
+  <div class="band my-6 py-2.5"><div class="track disp text-cream text-sm whitespace-nowrap" id="track"></div></div>
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-30 bg-ink/90 backdrop-blur border-b border-white/5" style="padding-top:env(safe-area-inset-top,0px)">
+    <div id="pills" class="relative flex gap-1 overflow-x-auto no-sb px-4 py-3" role="tablist" aria-label="Categorías"><div id="ind"></div></div>
+  </nav>
+
+  <main id="menu" class="px-5 pt-8 space-y-10"></main>
+
+  <footer class="rv mt-14 mx-5 mb-4 rounded-3xl bg-card border border-white/5 py-7 px-4 text-center">
+    <p class="disp text-red text-lg">Sugar Cube Coffee</p>
+    <p class="text-mute text-xs mt-1">Tijuana, Baja California</p>
+    <div class="h-px bg-white/10 my-5"></div>
+    <a href="#" data-wa class="inline-block disp text-sm text-cream" target="_blank" rel="noopener"><span class="text-red">✦</span> Página hecha por LÍNEA FRONTERA <span class="text-red">✦</span></a>
+    <p class="text-mute text-[11px] mt-1">¿Quieres un menú digital así? Escríbenos.</p>
+  </footer>
+
+  <!-- BARRA FIJA -->
+  <div class="fixed bottom-0 inset-x-0 z-40 pointer-events-none">
+    <div class="max-w-md mx-auto px-4 flex gap-3 pointer-events-auto" style="padding-bottom:calc(1rem + env(safe-area-inset-bottom,0px))">
+      <button id="cartBtn" class="relative bg-card border-2 border-red rounded-full w-16 grid place-items-center shrink-0 active:scale-90 transition" aria-label="Ver pedido">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFF0F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span id="cartCount" class="absolute -top-1.5 -right-1 bg-red text-cream text-xs font-bold rounded-full min-w-[1.4rem] h-[1.4rem] grid place-items-center hidden">0</span>
+      </button>
+      <a href="#" data-wa target="_blank" rel="noopener" class="cta flex-1 bg-red text-cream rounded-full py-4 flex items-center justify-center gap-2.5 font-bold active:scale-[.97] transition">
+        <svg class="wig" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0 11.9 11.9 0 0 0 1.7 17.8L0 24l6.4-1.7A11.9 11.9 0 0 0 12 24a11.9 11.9 0 0 0 8.5-20.5ZM12 21.8a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4A9.9 9.9 0 1 1 12 21.8Zm5.4-7.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.8-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.4 3.4 14.6 14.6 0 0 0 5.6 4.9c2 .8 2.7.9 3.7.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3Z"/></svg>
+        Pedir por WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <div id="toast" class="fixed left-1/2 z-[60] -translate-x-1/2 bg-cream text-ink text-sm font-bold rounded-full px-5 py-2.5 opacity-0 pointer-events-none" style="bottom:calc(6.5rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px)"></div>
+
+  <div id="overlay" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden"></div>
+  <section id="sheet" class="sheet fixed bottom-0 inset-x-0 z-50 translate-y-full" aria-hidden="true">
+    <div class="max-w-md mx-auto bg-card border-t-2 border-red rounded-t-3xl p-5" style="padding-bottom:calc(1.25rem + env(safe-area-inset-bottom,0px))">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="oval disp text-lg">Tu pedido ✦</h2>
+        <button id="closeSheet" class="text-mute text-3xl leading-none px-2" aria-label="Cerrar">×</button>
+      </div>
+      <div id="cartList" class="max-h-[42vh] overflow-y-auto no-sb divide-y divide-white/5"></div>
+      <div class="flex items-center justify-between mt-4 text-lg font-bold"><span>Total</span><span id="cartTotal" class="text-red">$0</span></div>
+      <button id="sendOrder" class="mt-4 w-full bg-red text-cream rounded-full py-4 font-bold active:scale-[.97] transition disabled:opacity-40">Enviar pedido por WhatsApp</button>
+      <button id="clearCart" class="mt-2 w-full text-mute text-sm py-2">Vaciar pedido</button>
+    </div>
+  </section>
+</div>
+
+<script>
+const WA_NUMBER='5216632272718';
+const WA_LINK='https://wa.me/'+WA_NUMBER+'?text=Me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20el%20men%C3%BA%20digital';
+const U=id=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=300&h=300&q=70`;
+const CATS=['Signature Coffee','Iced & Cold','Matcha & Especiales','Bakery'];
+const MENU=[
+{id:1,cat:0,name:'Espresso Bliss',desc:'Espreso intenso y con cuerpo de un solo shot.',price:45,img:'photo-1510707577719-ae7c14805e3a'},
+{id:2,cat:0,name:'Vanilla Latte',desc:'Espreso suave con un toque cremoso de vainilla.',price:65,img:'photo-1461023058943-07fcbe16d735'},
+{id:3,cat:0,name:'Caramel Macchiato',desc:'Espreso con leche espumosa y toque de caramelo.',price:75,img:'photo-1485808191679-5f86510681a2'},
+{id:4,cat:1,name:'Iced Americano',desc:'Café negro refrescante sobre cubos de hielo.',price:55,img:'photo-1517701604599-bb29b565090c'},
+{id:5,cat:1,name:'Caramel Frappé',desc:'Café frappé con caramelo, crema batida y hielo.',price:85,img:'photo-1572490122747-3968b75cc699'},
+{id:6,cat:2,name:'Matcha Espresso',desc:'Matcha ceremonial combinado con espreso intenso.',price:80,img:'photo-1515823064-d6e0c04616a7'},
+{id:7,cat:2,name:'Strawberry Matcha',desc:'Matcha frío sobre leche con puré de fresa.',price:85,img:'photo-1536256263959-770b48d82b0a'},
+{id:8,cat:3,name:'Croissant de mantequilla',desc:'Hojaldrado, dorado y horneado cada mañana.',price:55,img:'photo-1555507036-ab1f4038808a'},
+{id:9,cat:3,name:'Choco Chip Cookie',desc:'Galleta suave con trozos de chocolate semiamargo.',price:45,img:'photo-1499636136210-6f4ee915583e'}];
+const $=s=>document.querySelector(s),money=n=>'$'+n+' MXN',cart={};let active=-1;
+document.querySelectorAll('[data-wa]').forEach(a=>a.href=WA_LINK);
+
+// Splash
+addEventListener('load',()=>setTimeout(()=>{$('#splash').classList.add('leave');setTimeout(()=>$('#splash').remove(),1100)},1500));
+
+// Marquee
+const mk='✦ Sugar Cube Coffee ✦ Espresso ✦ Matcha ✦ Bakery ✦ ';$('#track').innerHTML=`<span class="px-2">${mk.repeat(4)}</span><span class="px-2">${mk.repeat(4)}</span>`;
+
+// Pills + indicador
+const pills=$('#pills'),ind=$('#ind');
+['Todos',...CATS].forEach((l,i)=>{const b=document.createElement('button');b.dataset.i=i-1;b.textContent=l;b.setAttribute('role','tab');
+ b.className='pill shrink-0 rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap';
+ b.onclick=()=>{active=i-1;renderPills();renderMenu();scrollTo({top:$('#menu').offsetTop-130,behavior:'smooth'})};pills.appendChild(b)});
+function renderPills(){pills.querySelectorAll('.pill').forEach(b=>{const on=+b.dataset.i===active;b.setAttribute('aria-selected',on);b.style.color=on?'#FFF0F3':'#A3A3A3';
+ if(on){ind.style.left=b.offsetLeft+'px';ind.style.width=b.offsetWidth+'px';b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'})}})}
+
+// Menú
+function renderMenu(){const m=$('#menu');m.innerHTML='';let n=0;
+ CATS.forEach((c,ci)=>{if(active!==-1&&active!==ci)return;
+  const s=document.createElement('section');s.innerHTML=`<h2 class="oval disp text-xl rv" style="--d:.05s">${c}</h2><div class="space-y-3 mt-5"></div>`;
+  const box=s.querySelector('div');
+  MENU.filter(p=>p.cat===ci).forEach(p=>{const a=document.createElement('article');a.className='item rv flex gap-3 bg-card rounded-2xl p-3';a.style.setProperty('--d',(n++%4)*.09+'s');
+   a.innerHTML=`<div class="w-24 h-24 shrink-0 rounded-xl overflow-hidden bg-gradient-to-br from-red to-ink grid place-items-center text-cream text-2xl"><img src="${U(p.img)}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover" onerror="this.remove();this.parentNode.textContent='✦'"></div>
+   <div class="flex-1 min-w-0 flex flex-col"><h3 class="font-extrabold uppercase text-[15px] leading-tight">${p.name}</h3><p class="text-mute text-xs mt-1 leading-snug">${p.desc}</p>
+   <div class="mt-auto pt-2 flex items-center justify-between"><span class="price text-red font-extrabold text-lg">$${p.price}</span><button data-add="${p.id}" class="add bg-red text-cream text-xs font-bold rounded-full px-4 py-2">+ Agregar</button></div></div>`;box.appendChild(a)});
+  m.appendChild(s)});observe()}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+function observe(){document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el))}
+
+// Agregar: ripple + vuelo a carrito + toast
+$('#menu').addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(!b)return;
+ const r=b.getBoundingClientRect(),d=document.createElement('span'),sz=Math.max(r.width,r.height);
+ d.className='rip';d.style.cssText=`width:${sz}px;height:${sz}px;left:${e.clientX-r.left-sz/2}px;top:${e.clientY-r.top-sz/2}px`;b.appendChild(d);setTimeout(()=>d.remove(),600);
+ fly(r);change(+b.dataset.add,1);toast('✦ '+MENU.find(p=>p.id==b.dataset.add).name+' agregado')});
+function fly(r){const t=$('#cartBtn').getBoundingClientRect(),f=document.createElement('div');
+ f.textContent='✦';f.style.cssText=`position:fixed;z-index:70;left:${r.left+r.width/2}px;top:${r.top}px;color:#D9232A;font-size:28px;pointer-events:none;text-shadow:0 0 12px #D9232A`;document.body.appendChild(f);
+ f.animate([{transform:'translate(0,0) scale(1)'},{transform:`translate(${(t.left-r.left)/2}px,-90px) scale(1.6) rotate(120deg)`,offset:.4},{transform:`translate(${t.left+t.width/2-r.left-r.width/2}px,${t.top-r.top}px) scale(.4) rotate(300deg)`,opacity:.5}],{duration:750,easing:'cubic-bezier(.5,0,.7,1)'}).onfinish=()=>f.remove()}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.style.opacity=1;t.style.transform='translate(-50%,0)';clearTimeout(tt);tt=setTimeout(()=>{t.style.opacity=0;t.style.transform='translate(-50%,20px)'},1500)}
+
+// Carrito
+function change(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];renderCart();const c=$('#cartCount');c.classList.remove('bump');void c.offsetWidth;c.classList.add('bump')}
+function renderCart(){const ids=Object.keys(cart).map(Number),q=ids.reduce((s,i)=>s+cart[i],0),tot=ids.reduce((s,i)=>s+cart[i]*MENU.find(p=>p.id===i).price,0),cc=$('#cartCount');
+ cc.textContent=q;cc.classList.toggle('hidden',!q);$('#cartTotal').textContent=money(tot);$('#sendOrder').disabled=!q;
+ $('#cartList').innerHTML=q?ids.map(i=>{const p=MENU.find(x=>x.id===i);return`<div class="flex items-center justify-between py-3 gap-3"><div class="min-w-0"><p class="font-bold text-sm uppercase truncate">${p.name}</p><p class="text-red text-xs">${money(p.price*cart[i])}</p></div><div class="flex items-center gap-3 shrink-0"><button data-d="-1" data-id="${i}" class="w-8 h-8 rounded-full border border-white/20" aria-label="Quitar uno">−</button><span class="w-4 text-center font-bold">${cart[i]}</span><button data-d="1" data-id="${i}" class="w-8 h-8 rounded-full bg-red" aria-label="Agregar uno">+</button></div></div>`}).join(''):'<p class="text-mute text-sm py-6 text-center">Tu pedido está vacío. Agrega algo del menú ✦</p>'}
+$('#cartList').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)change(+b.dataset.id,+b.dataset.d)});
+function openSheet(o){$('#sheet').classList.toggle('translate-y-full',!o);$('#overlay').classList.toggle('hidden',!o);$('#sheet').setAttribute('aria-hidden',!o)}
+$('#cartBtn').onclick=()=>openSheet(true);$('#closeSheet').onclick=$('#overlay').onclick=()=>openSheet(false);
+$('#clearCart').onclick=()=>{Object.keys(cart).forEach(k=>delete cart[k]);renderCart()};
+$('#sendOrder').onclick=()=>{const ids=Object.keys(cart).map(Number);if(!ids.length)return;let t=0;
+ const l=ids.map(i=>{const p=MENU.find(x=>x.id===i);t+=p.price*cart[i];return`• ${cart[i]}x ${p.name} — $${p.price*cart[i]}`});
+ open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hola, quiero hacer un pedido en Sugar Cube Coffee:\n\n${l.join('\n')}\n\nTotal: $${t} MXN\n\n¿Es para recoger o entrega?`)}`,'_blank','noopener')};
+addEventListener('keydown',e=>{if(e.key==='Escape')openSheet(false)});
+
+// Scroll: barra de progreso + parallax de destellos
+const sps=[...document.querySelectorAll('[data-px]')];
+addEventListener('scroll',()=>{const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;$('#prog').style.transform=`scaleX(${h>0?y/h:0})`;sps.forEach(s=>s.style.translate=`0 ${y*s.dataset.px/100}px`)},{passive:true});
+
+// Inclinación 3D del logo (puntero / giroscopio simple)
+const hero=$('#hero');
+hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;hero.style.transform=`perspective(700px) rotate(-3deg) rotateY(${x*18}deg) rotateX(${-y*18}deg)`});
+['pointerleave','pointerup'].forEach(ev=>hero.addEventListener(ev,()=>hero.style.transform=''));
+
+renderPills();renderMenu();renderCart();observe();
+addEventListener('resize',renderPills);
+</script>
+</body>
+</html>
